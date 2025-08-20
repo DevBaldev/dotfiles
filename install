@@ -1,18 +1,22 @@
 #!/bin/bash
 
+set -e  # Exit immediately if a command exits with a non-zero status
+
 sys_update() {
-  sudo pacman -Syu
+  sudo pacman -Syu --noconfirm
 }
 
 paru_install() {
-  sudo pacman -Sy rust
-  git clone https://aur.archlinux.org/paru.git && cd paru || exit
-  makepkg -si --noconfirm
-  cd .. && sudo rm -rf paru
+  if ! command -v paru &> /dev/null; then
+    sudo pacman -Sy rust --noconfirm
+    git clone https://aur.archlinux.org/paru.git
+    (cd paru && makepkg -si --noconfirm)
+    rm -rf paru
+  fi
 }
 
 install_pkgs() {
-  paru -Sy --needed "$@"
+  paru -Sy --needed "$@" --noconfirm
 }
 
 change_shell() {
@@ -36,10 +40,11 @@ pkgs_install() {
   install_pkgs mesa vulkan-radeon
   install_pkgs noto-fonts-{cjk,emoji,extra}
   install_pkgs ttf-{cascadia-code,jetbrains-mono}-nerd
-  install_pkgs pipewire{pulse,jack,alsa} wireplumber
+  install_pkgs pipewire-{pulse,jack,alsa} wireplumber
   install_pkgs qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct
-  install_pkgs hypr{land,paper,polkitagent} waybar mako ghostty wofi
-  install_pkgs rust lsd bat zoxide ripgrep
+  install_pkgs hypr{land,paper,polkitagent} waybar mako ghostty
+  install_pkgs wofi uwsm grim slurp swappy
+  install_pkgs rust lsd bat zoxide ripgrep tealdeer
   install_pkgs {lua,bash}-language-server stylua shfmt
   install_pkgs ruff pyright python-uv tombi clang rust-analyzer
   install_pkgs marksman vscode-{css,html}-languageserver prettier
@@ -51,12 +56,21 @@ pkgs_install() {
   install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin
 }
 
+app_setup() {
+  tldr -u
+  systemctl --user enable mako.service
+  systemctl --user enable waybar.service
+  systemctl --user enable hyprpaper.service
+  systemctl --user enable hyprpolkitagent.service
+}
+
 main() {
   sys_update
   paru_install
   change_shell
   link_dotfiles
   pkgs_install
+  app_setup
 }
 
 main
