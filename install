@@ -51,7 +51,7 @@ pkgs_install() {
   install_pkgs yazi ffmpeg 7zip jq poppler fd fzf imagemagick btop
   install_pkgs imv mpv yt-dlp zathura-{cb,pdf-mupdf}
   install_pkgs network-manager-applet blueman pavucontrol-qt bluez{,-tools}
-  install_pkgs obsidian spotify-launcher steam godot
+  install_pkgs obsidian spotify-launcher steam
   install_pkgs wofi-emoji ani-cli {librewolf,freetube}-bin
   install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin
 }
