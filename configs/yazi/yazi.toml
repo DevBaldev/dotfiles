@@ -2,5 +2,5 @@
 scrolloff = 5
 ratio = [0, 5, 3]
 show_hidden = false
-show_symlink = true
+show_symlink = false
 sort_by = "alphabetical"

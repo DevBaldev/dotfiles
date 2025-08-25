@@ -16,7 +16,7 @@ paru_install() {
 }
 
 install_pkgs() {
-  paru -Sy --needed "$@" --noconfirm
+  paru -Sy --needed "$@"
 }
 
 change_shell() {
@@ -43,7 +43,7 @@ pkgs_install() {
   install_pkgs pipewire-{pulse,jack,alsa} wireplumber
   install_pkgs qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct
   install_pkgs hypr{land,paper,polkitagent} waybar mako ghostty
-  install_pkgs wofi uwsm grim slurp swappy
+  install_pkgs wofi uwsm grim slurp swappy cliphist
   install_pkgs rust lsd bat zoxide ripgrep tealdeer
   install_pkgs {lua,bash}-language-server stylua shfmt
   install_pkgs ruff pyright python-uv tombi clang rust-analyzer
