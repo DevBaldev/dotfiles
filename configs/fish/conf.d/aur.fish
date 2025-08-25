@@ -1,7 +1,7 @@
-abbr --add pu 'paru -Rncus'
+abbr --add pu '$aurhelper -Rncus'
 
-abbr --add pi 'paru -S --needed'
+abbr --add pi '$aurhelper -S --needed'
 
-abbr --add yay 'paru -Syu --noconfirm'
+abbr --add yay '$aurhelper -Syu --noconfirm'
 
-abbr --add pc 'paru -Rncus $(paru -Qtdq) --noconfirm'
+abbr --add pc '$aurhelper -Rncus $($aurhelper -Qtdq) --noconfirm'
