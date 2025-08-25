@@ -1,3 +1,5 @@
+set -U aurhelper paru
+
 abbr --add pu '$aurhelper -Rncus'
 
 abbr --add pi '$aurhelper -S --needed'
