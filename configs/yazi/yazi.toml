@@ -4,3 +4,13 @@ ratio = [0, 5, 3]
 show_hidden = false
 show_symlink = false
 sort_by = "alphabetical"
+
+[opener]
+comics = [
+	{ run = 'zathura "$@"', orphan = true, for = "unix" },
+]
+
+[open]
+prepend_rules = [
+	{ name = "*.cbz", use = "comics" },
+]
