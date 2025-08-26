@@ -1,7 +1,7 @@
 require("nvchad.configs.lspconfig").defaults()
 
 local servers = {
-  "shfmt",
+  "bashls",
 
   "clangd",
 
