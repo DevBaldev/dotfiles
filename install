@@ -1,13 +1,13 @@
 #!/bin/bash
 
-set -e  # Exit immediately if a command exits with a non-zero status
+set -e # Exit immediately if a command exits with a non-zero status
 
 sys_update() {
   sudo pacman -Syu --noconfirm
 }
 
 paru_install() {
-  if ! command -v paru &> /dev/null; then
+  if ! command -v paru &>/dev/null; then
     sudo pacman -Sy rust --noconfirm
     git clone https://aur.archlinux.org/paru.git
     (cd paru && makepkg -si --noconfirm)
@@ -49,15 +49,15 @@ pkgs_install() {
   install_pkgs ruff pyright python-uv tombi clang rust-analyzer
   install_pkgs marksman vscode-{css,html}-languageserver prettier
   install_pkgs yazi ffmpeg 7zip jq poppler fd fzf imagemagick btop
-  install_pkgs imv mpv yt-dlp zathura-{cb,pdf-mupdf}
+  install_pkgs imv mpv yt-dlp okular
   install_pkgs network-manager-applet blueman pavucontrol-qt bluez{,-tools}
-  install_pkgs obsidian spotify-launcher steam
   install_pkgs wofi-emoji ani-cli {librewolf,freetube}-bin
   install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin
 }
 
 app_setup() {
   tldr -u
+  sudo systemctl enable bluetooth.service
   systemctl --user enable mako.service
   systemctl --user enable waybar.service
   systemctl --user enable hyprpaper.service
@@ -65,12 +65,12 @@ app_setup() {
 }
 
 main() {
-  #sys_update
-  #paru_install
-  #change_shell
+  sys_update
+  paru_install
+  change_shell
   link_dotfiles
-  #pkgs_install
-  #app_setup
+  pkgs_install
+  app_setup
 }
 
 main
