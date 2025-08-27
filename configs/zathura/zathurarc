@@ -1,2 +1,9 @@
 include catppuccin-mocha
+
+set adjust-open "best-fit"
+set pages-per-row 1
+set scroll-page-aware "true"
+set smooth-scroll "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
 set selection-clipboard clipboard
