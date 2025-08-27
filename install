@@ -16,7 +16,7 @@ paru_install() {
 }
 
 install_pkgs() {
-  paru -Sy --needed "$@"
+  paru -Sy --needed "$@" --noconfirm
 }
 
 change_shell() {
@@ -37,22 +37,24 @@ link_dotfiles() {
 }
 
 pkgs_install() {
-  install_pkgs mesa vulkan-radeon
-  install_pkgs noto-fonts-{cjk,emoji,extra}
-  install_pkgs ttf-{cascadia-code,jetbrains-mono}-nerd
-  install_pkgs pipewire-{pulse,jack,alsa} wireplumber
-  install_pkgs qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct
-  install_pkgs hypr{land,paper,polkitagent} waybar mako ghostty
-  install_pkgs wofi uwsm grim slurp swappy cliphist
-  install_pkgs rust lsd bat zoxide ripgrep tealdeer
-  install_pkgs {lua,bash}-language-server stylua shfmt
-  install_pkgs ruff pyright python-uv tombi clang rust-analyzer
-  install_pkgs marksman vscode-{css,html}-languageserver prettier
-  install_pkgs yazi ffmpeg 7zip jq poppler fd fzf imagemagick btop
-  install_pkgs imv mpv yt-dlp okular
-  install_pkgs network-manager-applet blueman pavucontrol-qt bluez{,-tools}
-  install_pkgs wofi-emoji ani-cli {librewolf,freetube}-bin
-  install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin
+  install_pkgs mesa vulkan-radeon                                                                # Drivers
+  install_pkgs noto-fonts-{cjk,emoji,extra} ttf-{cascadia-code,jetbrains-mono}-nerd              # Fonts
+  install_pkgs pipewire-{pulse,jack,alsa} wireplumber                                            # Pipewire
+  install_pkgs hypr{land,paper,polkitagent} waybar ghostty                                       # Hyprland
+  install_pkgs xdg-user-dir xdg-desktop-portal-{hyprland,gtk}                                    # Xdg tools
+  install_pkgs qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct                                     # Theme tools
+  install_pkgs wofi uwsm grim slurp swappy cliphist mako                                         # Utils
+  install_pkgs rust lsd bat zoxide ripgrep tealdeer img2pdf                                      # tools
+  install_pkgs pyright python-uv ruff                                                            # Python
+  install_pkgs {lua,bash}-language-server marksman vscode-{css,html}-languageserver              # LSP
+  install_pkgs stylua shfmt tombi clang rust-analyzer prettier                                   # Formaters
+  install_pkgs yazi ffmpeg 7zip jq poppler fd fzf imagemagick btop                               # Yazi
+  install_pkgs imv mpv yt-dlp zathura-{cb,pdf-mupdf}                                             # Media
+  install_pkgs obsidian steam                                                                    # Unfree
+  install_pkgs network-manager-applet networkmanager-openvpn                                     # Network
+  install_pkgs blueman pavucontrol-qt bluez{,-tools}                                             # Audio
+  install_pkgs wofi-emoji ani-cli {librewolf,freetube}-bin                                       # Aur
+  install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin # Themes
 }
 
 app_setup() {
