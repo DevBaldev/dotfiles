@@ -1,7 +1,6 @@
 export SHELL=fish
 export EDITOR=nvim
 export TERM=ghostty
-export BROWSER=librewolf
 
 export MOZ_ENABLE_WAYLAND=1
 export SDL_VIDEODRIVER="wayland"
