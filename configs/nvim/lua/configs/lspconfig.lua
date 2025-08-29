@@ -12,7 +12,6 @@ local servers = {
 
   "html",
   "cssls",
-  "marksman",
 }
 
 vim.lsp.enable(servers)
