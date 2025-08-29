@@ -10,6 +10,6 @@
 --audio-multistreams
 --video-multistreams
 --restrict-filenames
--o "%(title)s.%(ext)s"
 --sponsorblock-remove sponsor
+-o "%(playlist_index)s_%(title)s.%(ext)s"
 --format "bv*[height<=1080]+ba/b[height<=1080] / wv*+ba/w"

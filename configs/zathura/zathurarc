@@ -2,4 +2,5 @@ include catppuccin-mocha
 
 set adjust-open "best-fit"
 set pages-per-row 1
+set continuous-scroll false
 set selection-clipboard clipboard
