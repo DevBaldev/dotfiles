@@ -1,9 +1,7 @@
-set -U aurhelper paru
+abbr --add pu 'sudo pacman -Rncus'
 
-abbr --add pu '$aurhelper -Rncus'
+abbr --add pi 'sudo pacman -S --needed'
 
-abbr --add pi '$aurhelper -S --needed'
+abbr --add yay 'sudo pacman -Syu --noconfirm'
 
-abbr --add yay '$aurhelper -Syu --noconfirm'
-
-abbr --add pc '$aurhelper -Rncus $($aurhelper -Qtdq) --noconfirm'
+abbr --add pc 'sudo pacman -Rncus $(sudo pacman -Qtdq) --noconfirm'
