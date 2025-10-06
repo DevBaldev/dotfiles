@@ -1,0 +1,15 @@
+--no-mtime
+--embed-subs
+--write-subs
+--sub-langs en
+--lazy-playlist 
+--embed-metadata
+--embed-chapters
+--embed-info-json
+--downloader aria2c
+--audio-multistreams
+--video-multistreams
+--restrict-filenames
+--sponsorblock-remove sponsor
+-o "%(playlist_index)s_%(title)s.%(ext)s"
+--format "bv*[height<=1080]+ba/b[height<=1080] / wv*+ba/w"

@@ -1,0 +1,16 @@
+[mgr]
+scrolloff = 5
+ratio = [0, 5, 3]
+show_hidden = false
+show_symlink = false
+sort_by = "alphabetical"
+
+[opener]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+]
+
+[open]
+prepend_rules = [
+	{ name = "*.mp4", use = "play" },
+]

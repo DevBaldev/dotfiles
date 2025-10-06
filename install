@@ -1,0 +1,78 @@
+#!/bin/bash
+
+set -e # Exit immediately if a command exits with a non-zero status
+
+sys_update() {
+  sudo pacman -Syu --noconfirm
+}
+
+paru_install() {
+  if ! command -v paru &>/dev/null; then
+    sudo pacman -Sy rust --noconfirm
+    git clone https://aur.archlinux.org/paru.git
+    (cd paru && makepkg -si --noconfirm)
+    rm -rf paru
+  fi
+}
+
+install_pkgs() {
+  paru -Sy --needed "$@" --noconfirm
+}
+
+change_shell() {
+  install_pkgs fish starship
+  chsh -s "$(which fish)"
+}
+
+link_dotfiles() {
+  source_dir="$(pwd)/configs"
+  for file in "$source_dir"/*; do
+    target="$HOME/.config/$(basename "$file")"
+    if [ ! -e "$target" ]; then
+      ln -sf "$file" "$target"
+    else
+      echo "Warning: $target already exists. Skipping link creation."
+    fi
+  done
+}
+
+pkgs_install() {
+  install_pkgs mesa vulkan-radeon lib32-vulkan-radeon                                            # Drivers
+  install_pkgs noto-fonts-{cjk,emoji,extra} ttf-{cascadia-code,jetbrains-mono}-nerd              # Fonts
+  install_pkgs pipewire-{pulse,jack,alsa} wireplumber                                            # Pipewire
+  install_pkgs hypr{land,paper,polkitagent} waybar ghostty                                       # Hyprland
+  install_pkgs xdg-user-dirs xdg-desktop-portal-{hyprland,gtk}                                   # Xdg tools
+  install_pkgs qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct                                     # Theme tools
+  install_pkgs wofi uwsm grim slurp swappy cliphist mako                                         # Utils
+  install_pkgs rust lsd bat zoxide ripgrep tealdeer img2pdf                                      # tools
+  install_pkgs pyright python-uv ruff                                                            # Python
+  install_pkgs {lua,bash}-language-server marksman vscode-{css,html}-languageserver              # LSP
+  install_pkgs stylua shfmt tombi clang rust-analyzer prettier                                   # Formaters
+  install_pkgs yazi ffmpeg 7zip jq poppler fd fzf imagemagick btop                               # Yazi
+  install_pkgs imv mpv yt-dlp tesseract-data-eng mupdf                                           # Media
+  install_pkgs obsidian steam                                                                    # Unfree
+  install_pkgs network-manager-applet networkmanager-openvpn                                     # Network
+  install_pkgs blueman pavucontrol-qt bluez{,-tools}                                             # Audio
+  install_pkgs wofi-emoji ani-cli librewolf-bin                                                  # Aur
+  install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin # Themes
+}
+
+app_setup() {
+  tldr -u
+  sudo systemctl enable bluetooth.service
+  systemctl --user enable mako.service
+  systemctl --user enable waybar.service
+  systemctl --user enable hyprpaper.service
+  systemctl --user enable hyprpolkitagent.service
+}
+
+main() {
+  sys_update
+  paru_install
+  change_shell
+  link_dotfiles
+  pkgs_install
+  app_setup
+}
+
+main
