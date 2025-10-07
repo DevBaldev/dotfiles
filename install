@@ -53,7 +53,7 @@ pkgs_install() {
   install_pkgs obsidian steam                                                                    # Unfree
   install_pkgs network-manager-applet networkmanager-openvpn                                     # Network
   install_pkgs blueman pavucontrol-qt bluez{,-tools}                                             # Audio
-  install_pkgs wofi-emoji ani-cli librewolf-bin                                                  # Aur
+  install_pkgs wofi-emoji ani-cli librewolf-bin google-chrome                                    # Aur
   install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin # Themes
 }
 
