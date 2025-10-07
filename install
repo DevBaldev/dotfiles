@@ -40,7 +40,7 @@ pkgs_install() {
   install_pkgs mesa vulkan-radeon lib32-vulkan-radeon                                            # Drivers
   install_pkgs noto-fonts-{cjk,emoji,extra} ttf-{cascadia-code,jetbrains-mono}-nerd              # Fonts
   install_pkgs pipewire-{pulse,jack,alsa} wireplumber                                            # Pipewire
-  install_pkgs hypr{land,paper,polkitagent} waybar ghostty                                       # Hyprland
+  install_pkgs hypr{land,paper,polkitagent} waybar alacritty ueberzugpp                          # Hyprland
   install_pkgs xdg-user-dirs xdg-desktop-portal-{hyprland,gtk}                                   # Xdg tools
   install_pkgs qt6 qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct                                 # Theme tools
   install_pkgs wofi uwsm grim slurp swappy cliphist mako                                         # Utils

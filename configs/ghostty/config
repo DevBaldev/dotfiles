@@ -1,7 +1,0 @@
-font-size = 14
-window-vsync = true
-resize-overlay = never
-theme = Catppuccin Mocha
-shell-integration = fish
-window-padding-balance = true
-font-family = CaskaydiaCove Nerd Font
