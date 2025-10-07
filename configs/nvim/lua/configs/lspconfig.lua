@@ -1,16 +1,17 @@
 require("nvchad.configs.lspconfig").defaults()
 
 local servers = {
-  "bashls",
-
+  -- Compiled
   "clangd",
 
+  -- Scripting
   "ruff",
+  "bashls",
   "pyright",
 
-  "tombi",
-
+  -- Web-dev
   "html",
+  "tombi",
   "cssls",
   "marksman",
 }
