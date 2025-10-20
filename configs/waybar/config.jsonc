@@ -1,10 +1,6 @@
 {
+  "layer": "top",
   "position": "bottom",
-  "spacing": 2,
-  "exclusive": true,
-  "gtk-layer-shell": true,
-  "passthrough": true,
-  "fixed-center": true,
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["mpris"],
   "modules-right": [
@@ -12,8 +8,7 @@
     "wireplumber",
     "clock",
     "clock#simpleclock",
-    "tray",
-    "custom/notification"
+    "tray"
   ],
   "mpris": {
     "dynamic-order": ["artist", "title"],
@@ -75,25 +70,5 @@
   "custom/sep": {
     "format": "|",
     "tooltip": false
-  },
-  "custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
   }
 }
