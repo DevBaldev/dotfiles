@@ -2,7 +2,7 @@ function img2jpg
     set files $argv
 
     if test (count $files) -eq 0
-        echo "Usage: convert_images_to_jpg <file1> <file2> ..."
+        echo "Usage: img2jpg <file1> <file2> ..."
         return 1
     end
 
@@ -10,7 +10,7 @@ function img2jpg
         if test -e "$img"
             set base (basename "$img" | cut -d. -f1)
             set dir (dirname "$img")
-            convert "$img" "$dir/$base.jpg"
+            magick "$img" "$dir/$base.jpg"
             rm "$img"
             echo "Converted $img to $base.jpg."
         else
