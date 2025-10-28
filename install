@@ -49,7 +49,7 @@ pkgs_install() {
   install_pkgs {lua,bash}-language-server marksman vscode-{css,html}-languageserver              # LSP
   install_pkgs stylua shfmt tombi clang rust-analyzer prettier                                   # Formaters
   install_pkgs yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick btop          # Yazi
-  install_pkgs imv mpv yt-dlp qbittorrent                                                        # Media
+  install_pkgs imv mpv yt-dlp qbittorrent okular                                                 # Media
   install_pkgs network-manager-applet networkmanager-openvpn                                     # Network
   install_pkgs blueman pavucontrol-qt bluez{,-tools}                                             # Audio
   install_pkgs wofi-emoji ani-cli librewolf-bin                                                  # Aur
