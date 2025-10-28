@@ -66,11 +66,11 @@ app_setup() {
 }
 
 main() {
-  sys_update
-  paru_install
+  # sys_update
+  # paru_install
   link_dotfiles
-  pkgs_install
-  app_setup
+  # pkgs_install
+  # app_setup
 }
 
 main

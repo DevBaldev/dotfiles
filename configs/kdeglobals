@@ -1,2 +1,14 @@
-TerminalApplication=alacritty
-TerminalService=Alacritty.desktop
+[Colors:View]
+BackgroundNormal=#00000000
+
+[General]
+TerminalApplication=kitty
+
+[Icons]
+Theme=Will be overwritten on themeswitch
+
+[UiSettings]
+ColorScheme=colors
+
+[Wallet]
+Enabled=false
