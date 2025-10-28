@@ -9,3 +9,7 @@ image/jpeg=imv.desktop
 image/jpg=imv.desktop
 image/png=imv.desktop
 image/webp=imv.desktop
+application/pdf=okularApplication_pdf.desktop
+application/x-cbz=okularApplication_comicbook.desktop
+application/x-cbr=okularApplication_comicbook.desktop
+application/epub+zip=okularApplication_epub.desktop

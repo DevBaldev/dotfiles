@@ -1,10 +1,17 @@
 [Core General]
 ObeyDRM=false
 
+[Core Performance]
+TextHinting=Enabled
+
 [General]
 MaxRecentItems=0
 
+[Main View]
+ShowLeftPanel=false
+
 [PageView]
+PrimaryAnnotationToolBar=QuickAnnotationToolBar
 ShowScrollBars=false
 SmoothScrolling=false
 ViewContinuous=false
