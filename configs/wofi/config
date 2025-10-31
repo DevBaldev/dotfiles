@@ -1,9 +1,10 @@
-prompt =
+prompt=
 width=50%
 mode=show
 show=drun
 height=40%
 columns=3
+term=ghostty
 gtk_dark=true
 show_all=true
 hide_scroll=true
