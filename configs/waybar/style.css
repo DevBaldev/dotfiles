@@ -6,8 +6,20 @@
 
 window#waybar {
   transition-duration: 0.5s;
-  background-color: rgb(30, 30, 46);
+  background-color: rgba(30, 30, 46, 0);
   transition-property: background-color;
+}
+
+#custom-wofi {
+  color: #cba6f7;
+  font-size: 20px;
+  padding: 0.3rem 0.8rem;
+  margin: 0.4rem 0.25rem;
+}
+
+#custom-wofi:hover {
+  color: #1e1e2e;
+  background-color: #89b4fa;
 }
 
 #workspaces button {
@@ -26,6 +38,11 @@ window#waybar {
 #workspaces button.active {
   color: #89b4fa;
   background-color: #1e1e2e;
+}
+
+#workspaces button.active:hover {
+  color: #1e1e2e;
+  background-color: #cdd6f4;
 }
 
 #workspaces button.urgent {

@@ -1,7 +1,10 @@
 {
   "layer": "top",
   "position": "bottom",
-  "modules-left": ["hyprland/workspaces"],
+  "modules-left": [
+    "custom/wofi",
+    "hyprland/workspaces"
+  ],
   "modules-center": ["mpris"],
   "modules-right": [
     "memory",
@@ -28,13 +31,12 @@
       "*": 5
     },
     "format-icons": {
-		  "1": "󰣇",
+		  "1": "",
 		  "2": "",
 		  "3": "",
-		  "4": "",
+		  "4": "",
 		  "5": "",
-		"active": "",
-		"default": ""
+		  "active": ""
 	  },
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1"
@@ -78,8 +80,9 @@
     },
     "on-click": "uwsm app -- pavucontrol-qt"
   },
-  "custom/sep": {
-    "format": "|",
-    "tooltip": false
+  "custom/wofi": {
+	  "format": "󰣇",
+    "tooltip": false,
+	  "on-click": "uwsm app -- wofi"
   }
 }
