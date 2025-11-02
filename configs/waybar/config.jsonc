@@ -23,11 +23,21 @@
     }
   },
   "hyprland/workspaces": {
-    "on-click": "activate",
-    "format": "{id}",
-    "all-outputs": true,
-    "disable-scroll": false,
-    "active-only": false
+    "format": "{icon}",
+    "persistent-workspaces": {
+      "*": 5
+    },
+    "format-icons": {
+		  "1": "󰣇",
+		  "2": "",
+		  "3": "",
+		  "4": "",
+		  "5": "",
+		"active": "",
+		"default": ""
+	  },
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1"
   },
   "tray": {
     "show-passive-items": true,
@@ -56,7 +66,8 @@
   "memory": {
     "interval": 30,
     "format": " {used}G",
-    "tooltip": true
+    "on-click": "uwsm app -- ghostty -e btop",
+    "tooltip": false
   },
   "wireplumber": {
     "format": "{icon} {volume}%",
@@ -65,7 +76,7 @@
       "headphone": "",
       "default": [" ", " ", " "]
     },
-    "on-click": "pavucontrol-qt"
+    "on-click": "uwsm app -- pavucontrol-qt"
   },
   "custom/sep": {
     "format": "|",
