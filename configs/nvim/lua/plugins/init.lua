@@ -18,23 +18,25 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
+        -- Neovim
         "vim",
         "lua",
         "vimdoc",
 
-        "bash",
-        "fish",
-
+        -- Compiled
         "c",
         "cpp",
         "rust",
 
+        -- Scripting
+        "bash",
+        "fish",
         "python",
 
-        "toml",
-
+        -- Web-dev
         "css",
         "html",
+        "toml",
         "markdown",
       },
     },
