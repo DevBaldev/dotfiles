@@ -35,8 +35,7 @@
 		  "2": "",
 		  "3": "",
 		  "4": "",
-		  "5": "",
-		  "active": ""
+		  "5": ""
 	  },
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1"
