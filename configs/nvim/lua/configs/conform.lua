@@ -1,18 +1,14 @@
 local options = {
   formatters_by_ft = {
-    -- Compiled
-    c = { "clang-format" },
-    cpp = { "clang-format" },
-
-    -- Scripting
     lua = { "stylua" },
     bash = { "shfmt" },
-    python = { "ruff format" },
-
-    -- Web-dev
-    toml = { "tombi" },
-    css = { "prettier" },
-    html = { "prettier" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
+    python = {
+      "ruff_fix",
+      "ruff_format",
+      "ruff_organize_imports",
+    },
     markdown = { "prettier" },
   },
 

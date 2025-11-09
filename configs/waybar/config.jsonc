@@ -77,7 +77,7 @@
       "headphone": "",
       "default": [" ", " ", " "]
     },
-    "on-click": "uwsm app -- pavucontrol-qt"
+    "on-click": "uwsm app -- hyprpwcenter"
   },
   "custom/wofi": {
 	  "format": "󰣇",
