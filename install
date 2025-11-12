@@ -54,8 +54,8 @@ pkgs_install() {
   install_pkgs blue{man,z{,-tools}}                                                              # bluetooth
   install_pkgs wofi-emoji ani-cli librewolf-bin                                                  # Aur
   install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin # Themes
-  install_pkgs lib32-mesa lib32-vulkan-radeon lib32-vulkan-icd-loader steam                      # Gaming
-  install_pkgs godot gimp blender                                                                # CC
+  #install_pkgs lib32-mesa lib32-vulkan-radeon lib32-vulkan-icd-loader steam                      # Gaming
+  #install_pkgs godot gimp blender                                                                # CC
 }
 
 app_setup() {
