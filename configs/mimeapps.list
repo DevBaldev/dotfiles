@@ -11,3 +11,4 @@ x-scheme-handler/https=librewolf.desktop
 x-scheme-handler/about=librewolf.desktop
 x-scheme-handler/unknown=librewolf.desktop
 x-scheme-handler/freetube=FreeTube.desktop
+x-scheme-handler/discord-424004941485572097=discord-424004941485572097.desktop
