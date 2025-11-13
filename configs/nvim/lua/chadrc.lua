@@ -12,7 +12,7 @@ M.base46 = {
 M.ui = {
   statusline = {
     theme = "default", -- default/vscode/vscode_colored/minimal
-    separator_style = "round", -- default/round/block/arrow
+    separator_style = "block", -- default/round/block/arrow
   },
 }
 
