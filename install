@@ -46,10 +46,10 @@ pkgs_install() {
   install_pkgs wofi uwsm grim slurp swappy cliphist mako waybar                                  # Utils
   install_pkgs ghostty rust lsd bat zoxide ripgrep tealdeer btop                                 # tools
   install_pkgs pyright python-uv ruff                                                            # Python
-  install_pkgs {lua,bash}-language-server marksman harper                                        # LSP
-  install_pkgs stylua shfmt clang rust-analyzer prettier                                         # Formaters
+  install_pkgs lua-language-server marksman harper                                               # LSP
+  install_pkgs stylua clang prettier                                                             # Formaters
   install_pkgs yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick               # Yazi
-  install_pkgs imv mpv yt-dlp qbittorrent obsidian                                               # Media
+  install_pkgs imv mpv yt-dlp obsidian                                                           # Media
   install_pkgs network{manager-openvpn,-manager-applet}                                          # Network
   install_pkgs blue{man,z{,-tools}}                                                              # bluetooth
   install_pkgs wofi-emoji ani-cli librewolf-bin                                                  # Aur

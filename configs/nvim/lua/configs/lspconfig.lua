@@ -2,7 +2,6 @@ require("nvchad.configs.lspconfig").defaults()
 
 local servers = {
   "clangd",
-  "bashls",
   "ruff",
   "pyright",
   "marksman",

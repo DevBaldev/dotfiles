@@ -1,7 +1,6 @@
 local options = {
   formatters_by_ft = {
     lua = { "stylua" },
-    bash = { "shfmt" },
     c = { "clang-format" },
     cpp = { "clang-format" },
     python = {
