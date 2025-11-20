@@ -1,9 +1,9 @@
 prompt=
-width=50%
+width=45%
 mode=show
 show=drun
-height=30%
-columns=3
+height=45%
+columns=2
 term=ghostty
 gtk_dark=true
 show_all=true
