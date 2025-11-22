@@ -58,7 +58,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "uwsm app -- ghostty -e impala"
+    "on-click": "uwsm app -- ghostty -e nmtui"
   },
   "wireplumber": {
     "format": "{icon}",
@@ -77,10 +77,6 @@
     "on-click": "uwsm app -- ghostty -e btop",
     "tooltip": false
   },
-  "clock#simpleclock": {
-    "tooltip": false,
-    "format": " {:%H:%M}"
-  },
   "clock": {
     "format": " {:L%a %d %b}",
     "calendar": {
@@ -95,6 +91,14 @@
       "mode-mon-col": 1,
       "on-scroll": 1
     },
-    "tooltip-format": "<span color='#cdd6f4' font='Lexend 16'><tt><small>{calendar}</small></tt></span>"
+    "tooltip-format": "<span color='#cdd6f4'><tt><small>{calendar}</small></tt></span>"
+  },
+  "clock#simpleclock": {
+    "tooltip": false,
+    "format": " {:%H:%M}"
+  },
+  "tray": {
+    "show-passive-items": true,
+    "spacing": 10
   }
 }

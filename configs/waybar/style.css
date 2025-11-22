@@ -1,52 +1,53 @@
 * {
-  font-family: Lexend, "CaskaydiaCove Nerd Font";
-  font-size: 16px;
-  font-weight: 600;
+  background-color: #181824;
+  color: #cdd6f4;
+
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: "CaskaydiaCove Nerd Font";
+  font-size: 12px;
 }
 
-window#waybar {
-  transition-duration: 0.5s;
-  background-color: rgba(30, 30, 46, 0);
-  transition-property: background-color;
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
 }
 
 #workspaces button {
-  color: #cdd6f4;
-  border-radius: 6px;
-  padding: 0.3rem 0.6rem;
-  margin: 0.4rem 0.25rem;
-  background-color: #1e1e2e;
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
 }
 
-#workspaces button:hover {
-  color: #1e1e2e;
-  background-color: #cdd6f4;
-}
-
-#workspaces button.active {
-  color: #89b4fa;
-  background-color: #1e1e2e;
-}
-
-#workspaces button.active:hover {
-  color: #1e1e2e;
-  background-color: #cdd6f4;
-}
-
-#workspaces button.urgent {
-  color: #f38ba8;
-  background-color: #1e1e2e;
+#workspaces button.empty {
+  opacity: 0.5;
 }
 
 #clock,
 #wireplumber,
-#tray,
 #memory,
 #mpris {
   border-radius: 6px;
   padding: 0.3rem 0.6rem;
   margin: 0.4rem 0.25rem;
   background-color: #1e1e2e;
+}
+
+#tray {
+  margin-right: 16px;
+}
+
+#bluetooth {
+  margin-right: 17px;
+}
+
+#network {
+  margin-right: 13px;
 }
 
 #mpris.playing {
