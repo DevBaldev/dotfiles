@@ -50,10 +50,9 @@ pkgs_install() {
   install_pkgs stylua clang prettier                                                             # Formaters
   install_pkgs yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick               # Yazi
   install_pkgs imv mpv yt-dlp obsidian                                                           # Media
-  install_pkgs qutebrowser python-{adblock,pygments}                                             # Browser
   install_pkgs network{manager-openvpn,-manager-applet}                                          # Network
   install_pkgs blue{tui,z{,-tools}}                                                              # bluetooth
-  install_pkgs wofi-emoji ani-cli                                                                # Aur
+  install_pkgs wofi-emoji ani-cli librewolf-bin                                                  # Aur
   install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin # Themes
   install_pkgs lib32-{mesa,vulkan-{radeon,icd-loader}} steam                                     # Gaming
 }
