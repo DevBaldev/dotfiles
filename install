@@ -39,22 +39,23 @@ link_dotfiles() {
 pkgs_install() {
   install_pkgs mesa vulkan-radeon                                                                # Drivers
   install_pkgs noto-fonts-{cjk,emoji,extra} ttf-cascadia-code-nerd                               # Fonts
-  install_pkgs pipewire-{pulse,jack,alsa} wireplumber                                            # Pipewire
-  install_pkgs hypr{land,paper,polkitagent,sunset,toolkit,pwcenter}                              # Hyprland
-  install_pkgs xdg-user-dirs xdg-desktop-portal-{hyprland,gtk}                                   # Xdg tools
+  install_pkgs pipewire-{pulse,jack,alsa} wireplumber wiremix pamixer                            # Audio
+  install_pkgs hypr{land,paper,polkitagent,sunset,toolkit}                                       # Hyprland
+  install_pkgs xdg-{user-dirs,desktop-portal-{hyprland,gtk}}                                     # Xdg tools
   install_pkgs qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct                                     # Theme tools
   install_pkgs wofi uwsm grim slurp swappy cliphist mako waybar                                  # Utils
-  install_pkgs ghostty rust lsd bat zoxide ripgrep tealdeer btop                                 # tools
+  install_pkgs ghostty rust lsd bat zoxide ripgrep tealdeer btop impala                          # tools
   install_pkgs pyright python-uv ruff                                                            # Python
   install_pkgs lua-language-server marksman harper                                               # LSP
   install_pkgs stylua clang prettier                                                             # Formaters
   install_pkgs yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick               # Yazi
   install_pkgs imv mpv yt-dlp obsidian                                                           # Media
+  install_pkgs qutebrowser python-{adblock,pygments}                                             # Browser
   install_pkgs network{manager-openvpn,-manager-applet}                                          # Network
-  install_pkgs blue{man,z{,-tools}}                                                              # bluetooth
-  install_pkgs wofi-emoji ani-cli librewolf-bin                                                  # Aur
+  install_pkgs blue{tui,z{,-tools}}                                                              # bluetooth
+  install_pkgs wofi-emoji ani-cli                                                                # Aur
   install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin # Themes
-  install_pkgs lib32-mesa lib32-vulkan-radeon lib32-vulkan-icd-loader steam                      # Gaming
+  install_pkgs lib32-{mesa,vulkan-{radeon,icd-loader}} steam                                     # Gaming
 }
 
 app_setup() {

@@ -10,18 +10,6 @@ window#waybar {
   transition-property: background-color;
 }
 
-#custom-wofi {
-  color: #cba6f7;
-  font-size: 20px;
-  padding: 0.3rem 0.8rem;
-  margin: 0.4rem 0.25rem;
-}
-
-#custom-wofi:hover {
-  color: #1e1e2e;
-  background-color: #89b4fa;
-}
-
 #workspaces button {
   color: #cdd6f4;
   border-radius: 6px;

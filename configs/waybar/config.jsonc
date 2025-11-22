@@ -1,31 +1,18 @@
 {
   "layer": "top",
   "position": "bottom",
-  "modules-left": [
-    "custom/wofi",
-    "hyprland/workspaces"
-  ],
+  "modules-left": ["hyprland/workspaces"],
   "modules-center": ["mpris"],
   "modules-right": [
-    "memory",
+    "bluetooth",
     "wireplumber",
+    "memory",
+    "network",
     "clock",
-    "clock#simpleclock",
-    "tray"
+    "clock#simpleclock"
   ],
-  "mpris": {
-    "dynamic-order": ["artist", "title"],
-    "title-len": 20,
-    "format": "{player_icon} {dynamic}",
-    "format-paused": "{status_icon} <i>{dynamic}</i>",
-    "status-icons": {
-      "paused": ""
-    },
-    "player-icons": {
-      "default": ""
-    }
-  },
   "hyprland/workspaces": {
+    "on-click": "activate",
     "format": "{icon}",
     "persistent-workspaces": {
       "*": 5
@@ -40,9 +27,55 @@
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1"
   },
-  "tray": {
-    "show-passive-items": true,
-    "spacing": 10
+  "mpris": {
+    "dynamic-order": ["artist", "title"],
+    "title-len": 20,
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "status-icons": {
+      "paused": ""
+    },
+    "player-icons": {
+      "default": ""
+    }
+  },
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "format-no-controller": "",
+    "tooltip-format": "Devices connected: {num_connections}",
+    "on-click": "uwsm app -- ghostty -e bluetui"
+  },
+  "network": {
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format": "{icon}",
+    "format-wifi": "{icon}",
+    "format-ethernet": "󰀂",
+    "format-disconnected": "󰤮",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 3,
+    "spacing": 1,
+    "on-click": "uwsm app -- ghostty -e impala"
+  },
+  "wireplumber": {
+    "format": "{icon}",
+    "on-click": "uwsm app -- ghostty -e wiremix",
+    "on-click-right": "pamixer -t",
+    "tooltip-format": "Playing at {volume}%",
+    "scroll-step": 5,
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", ""]
+    }
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {used}G",
+    "on-click": "uwsm app -- ghostty -e btop",
+    "tooltip": false
   },
   "clock#simpleclock": {
     "tooltip": false,
@@ -63,25 +96,5 @@
       "on-scroll": 1
     },
     "tooltip-format": "<span color='#cdd6f4' font='Lexend 16'><tt><small>{calendar}</small></tt></span>"
-  },
-  "memory": {
-    "interval": 30,
-    "format": " {used}G",
-    "on-click": "uwsm app -- ghostty -e btop",
-    "tooltip": false
-  },
-  "wireplumber": {
-    "format": "{icon} {volume}%",
-    "format-muted": "  muted",
-    "format-icons": {
-      "headphone": "",
-      "default": [" ", " ", " "]
-    },
-    "on-click": "uwsm app -- hyprpwcenter"
-  },
-  "custom/wofi": {
-	  "format": "󰣇",
-    "tooltip": false,
-	  "on-click": "uwsm app -- wofi"
   }
 }
