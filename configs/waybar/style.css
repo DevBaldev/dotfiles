@@ -1,97 +1,73 @@
 * {
-  background-color: #181824;
-  color: #cdd6f4;
-
-  border: none;
-  border-radius: 0;
-  min-height: 0;
-  font-family: "CaskaydiaCove Nerd Font";
-  font-size: 12px;
+    font: 600 16px "CaskaydiaCove Nerd Font", sans-serif;
 }
 
-.modules-left {
-  margin-left: 8px;
+window#waybar {
+    transition: background-color 0.5s;
+    background-color: rgba(30, 30, 46, 0);
 }
 
-.modules-right {
-  margin-right: 8px;
-}
-
-#workspaces button {
-  all: initial;
-  padding: 0 6px;
-  margin: 0 1.5px;
-  min-width: 9px;
-}
-
-#workspaces button.empty {
-  opacity: 0.5;
-}
-
-#clock,
+#workspaces button,
+#mpris,
+#tray,
+#bluetooth,
 #wireplumber,
+#network,
 #memory,
-#mpris {
-  border-radius: 6px;
-  padding: 0.3rem 0.6rem;
-  margin: 0.4rem 0.25rem;
-  background-color: #1e1e2e;
+#clock {
+    color: #cdd6f4;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    margin: 0.4rem 0.25rem;
+    background-color: #1e1e2e;
 }
 
-#tray {
-  margin-right: 16px;
+#workspaces button:hover,
+#workspaces button.active:hover {
+    color: #1e1e2e;
+    background-color: #cdd6f4;
 }
 
-#bluetooth {
-  margin-right: 17px;
+#workspaces button.active {
+    color: #cba6f7;
 }
 
-#network {
-  margin-right: 13px;
+#workspaces button.urgent {
+    color: #f38ba8;
 }
 
 #mpris.playing {
-  color: #a6e3a1;
+    color: #89b4fa;
 }
 
-#mpris.paused {
-  color: #9399b2;
-}
-
-#custom-sep {
-  padding: 0px;
-  color: #585b70;
-}
-
-window#waybar.empty #window {
-  background-color: transparent;
+#mpris.paused, #wireplumber.muted {
+    color: #45475a;
 }
 
 #memory {
-  color: #cba6f7;
+    color: #f9e2af;
 }
 
-#clock {
-  color: #74c7ec;
+#bluetooth,
+#wireplumber,
+#network {
+    color: #94e2d5;
 }
 
+#clock,
 #clock.simpleclock {
-  color: #89b4fa;
+    color: #89b4fa;
 }
 
 #window {
-  color: #cdd6f4;
+    color: #cdd6f4;
 }
 
-#wireplumber {
-  color: #b4befe;
-}
-
-#wireplumber.muted {
-  color: #a6adc8;
+window#waybar.empty #window {
+    background-color: rgba(30, 30, 46, 0);
 }
 
 tooltip {
-  background-color: #181825;
-  border: 2px solid #89b4fa;
+    background-color: #1e1e2e;
+    border: 1px solid #cba6f7;
 }

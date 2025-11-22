@@ -44,7 +44,7 @@ pkgs_install() {
   install_pkgs xdg-{user-dirs,desktop-portal-{hyprland,gtk}}                                     # Xdg tools
   install_pkgs qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct                                     # Theme tools
   install_pkgs wofi uwsm grim slurp swappy cliphist mako waybar                                  # Utils
-  install_pkgs ghostty rust lsd bat zoxide ripgrep tealdeer btop impala                          # tools
+  install_pkgs ghostty rust lsd bat zoxide ripgrep tealdeer btop                                 # tools
   install_pkgs pyright python-uv ruff                                                            # Python
   install_pkgs lua-language-server marksman harper                                               # LSP
   install_pkgs stylua clang prettier                                                             # Formaters

@@ -4,9 +4,9 @@
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["mpris"],
   "modules-right": [
-    "bluetooth",
-    "wireplumber",
     "memory",
+    "wireplumber",
+    "bluetooth",
     "network",
     "clock",
     "clock#simpleclock"
@@ -45,12 +45,12 @@
     "format-connected": "󰂱",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "uwsm app -- ghostty -e bluetui"
+    "on-click": "uwsm app -- ghostty --title=bluetui -e bluetui"
   },
   "network": {
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "format": "{icon}",
-    "format-wifi": "{icon}",
+    "format": "{icon} ",
+    "format-wifi": "{icon} ",
     "format-ethernet": "󰀂",
     "format-disconnected": "󰤮",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
@@ -58,15 +58,15 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "uwsm app -- ghostty -e nmtui"
+    "on-click": "uwsm app -- ghostty -e impala"
   },
   "wireplumber": {
-    "format": "{icon}",
-    "on-click": "uwsm app -- ghostty -e wiremix",
+    "format": "{icon} ",
+    "on-click": "uwsm app -- ghostty --title=wiremix -e wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,
-    "format-muted": "",
+    "format-muted": " ",
     "format-icons": {
       "default": ["", "", ""]
     }
@@ -74,11 +74,15 @@
   "memory": {
     "interval": 30,
     "format": " {used}G",
-    "on-click": "uwsm app -- ghostty -e btop",
+    "on-click": "uwsm app -- ghostty --title=btop -e btop",
     "tooltip": false
   },
+  "clock#simpleclock": {
+    "tooltip": false,
+    "format": "{:%H:%M}"
+  },
   "clock": {
-    "format": " {:L%a %d %b}",
+    "format": "{:L%a %d.%m.%y}",
     "calendar": {
       "format": {
         "days": "<span weight='normal'>{}</span>",
@@ -91,14 +95,6 @@
       "mode-mon-col": 1,
       "on-scroll": 1
     },
-    "tooltip-format": "<span color='#cdd6f4'><tt><small>{calendar}</small></tt></span>"
-  },
-  "clock#simpleclock": {
-    "tooltip": false,
-    "format": " {:%H:%M}"
-  },
-  "tray": {
-    "show-passive-items": true,
-    "spacing": 10
+    "tooltip-format": "<span color='#cdd6f4' font='Lexend 16'><tt><small>{calendar}</small></tt></span>"
   }
 }
