@@ -30,7 +30,8 @@
             "5": ""
         },
         "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1"
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "tooltip": true
     },
     "mpris": {
         "dynamic-order": [
@@ -45,7 +46,8 @@
         },
         "player-icons": {
             "default": ""
-        }
+        },
+        "tooltip-format": "{player} ({status})\n{dynamic}"
     },
     "tray": {
         "icon-size": 16,
@@ -56,7 +58,9 @@
         "format-disabled": "󰂲",
         "format-connected": "󰂱",
         "format-no-controller": "",
-        "tooltip-format": "Devices connected: {num_connections}",
+        "tooltip-format": "Controller: {controller_alias}\t{controller_address}\nStatus: {status}",
+        "tooltip-format-connected": "Controller: {controller_alias}\t{controller_address}\n\nConnected Devices:\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "on-click": "uwsm app -- ghostty --title=bluetui -e bluetui"
     },
     "network": {
@@ -71,8 +75,8 @@
         "format-wifi": "{icon} ",
         "format-ethernet": "󰀂",
         "format-disconnected": "󰤮",
-        "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-        "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-wifi": " {essid} ({frequency}GHz)\n<b>IP:</b> {ipaddr}/{cidr}\n<b>Gw:</b> {gwaddr}\n\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-ethernet": " {ifname}\n<b>IP:</b> {ipaddr}/{cidr}\n\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
         "tooltip-format-disconnected": "Disconnected",
         "interval": 3,
         "spacing": 1,
@@ -82,7 +86,7 @@
         "format": "{icon} ",
         "on-click": "uwsm app -- ghostty --title=wiremix -e wiremix",
         "on-click-right": "pamixer -t",
-        "tooltip-format": "Playing at {volume}%",
+        "tooltip-format": "Device: {node_name}\nVolume: {volume}%",
         "scroll-step": 5,
         "format-muted": " ",
         "format-icons": {
@@ -97,11 +101,13 @@
         "interval": 30,
         "format": " {used}G",
         "on-click": "uwsm app -- ghostty --title=btop -e btop",
-        "tooltip": false
+        "tooltip": true,
+        "tooltip-format": " {used:0.1f}GB/{total:0.1f}GB ({percentage}%)\n {swapUsed:0.1f}GB/{swapTotal:0.1f}GB"
     },
     "clock#simpleclock": {
-        "tooltip": false,
-        "format": "{:%H:%M}"
+        "tooltip": true,
+        "format": "{:%H:%M}",
+        "tooltip-format": "Standard Time\n{:%Y-%m-%d %H:%M:%S}"
     },
     "clock": {
         "format": "{:%a %d.%m.%y}",
