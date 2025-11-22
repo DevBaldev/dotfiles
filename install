@@ -1,79 +1,307 @@
 #!/bin/bash
 
-set -e # Exit immediately if a command exits with a non-zero status
+# --------------------------------------------------------------------------
+# Configuration & Variables
+# --------------------------------------------------------------------------
+DOTFILES_DIR="$(pwd)/configs"
+LOG_FILE="install_log.txt"
+
+# Colors for logging
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+RED="\033[0;31m"
+NC="\033[0m" # No Color
+
+# --------------------------------------------------------------------------
+# Helper Functions
+# --------------------------------------------------------------------------
+
+log() {
+    echo -e "${GREEN}[INFO]${NC} $1"
+}
+
+warn() {
+    echo -e "${YELLOW}[WARN]${NC} $1"
+}
+
+err() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
+# Error handling: Trap errors and log the line number
+trap 'err "Script failed on line $LINENO"' ERR
+set -e
+
+# Keep sudo alive
+sudo_refresh() {
+    while true; do sudo -v; sleep 60; done &
+    SUDO_PID=$!
+    trap 'kill $SUDO_PID' EXIT
+}
+
+# --------------------------------------------------------------------------
+# Core Logic
+# --------------------------------------------------------------------------
 
 sys_update() {
-  sudo pacman -Syu --noconfirm
+    log "Updating system and installing base-devel..."
+    sudo pacman -Syu --noconfirm --needed base-devel git
 }
 
 paru_install() {
-  if ! command -v paru &>/dev/null; then
-    sudo pacman -Sy rust --noconfirm
-    git clone https://aur.archlinux.org/paru.git
-    (cd paru && makepkg -si --noconfirm)
-    rm -rf paru
-  fi
+    if command -v paru &>/dev/null; then
+        log "Paru is already installed."
+        return
+    fi
+
+    log "Installing Paru AUR helper..."
+    # Ensure rust is installed via pacman first
+    sudo pacman -S --needed --noconfirm rust
+    
+    git clone https://aur.archlinux.org/paru.git /tmp/paru
+    pushd /tmp/paru
+    makepkg -si --noconfirm
+    popd
+    rm -rf /tmp/paru
+}
+
+detect_gpu_drivers() {
+    log "Detecting GPU for driver installation..."
+    gpu_pkgs=""
+    
+    if lspci | grep -i "nvidia" &>/dev/null; then
+        log "Nvidia GPU detected."
+        gpu_pkgs="nvidia-dkms nvidia-utils lib32-nvidia-utils egl-wayland"
+    elif lspci | grep -i "amd" &>/dev/null; then
+        log "AMD GPU detected."
+        gpu_pkgs="mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader"
+    elif lspci | grep -i "intel" &>/dev/null; then
+        log "Intel GPU detected."
+        gpu_pkgs="mesa lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader"
+    fi
+
+    echo "$gpu_pkgs"
 }
 
 install_pkgs() {
-  paru -Sy --needed "$@" --noconfirm
+    log "Installing packages..."
+    
+    # Detect GPU drivers dynamically
+    DRIVERS=$(detect_gpu_drivers)
+
+    # Define packages in arrays for better readability
+    
+    FONTS=(
+        noto-fonts
+        noto-fonts-cjk
+        noto-fonts-emoji
+        noto-fonts-extra
+        ttf-cascadia-code-nerd
+    )
+
+    AUDIO=(
+        pipewire
+        pipewire-pulse
+        pipewire-jack
+        pipewire-alsa
+        wireplumber
+        pamixer
+    )
+
+    HYPRLAND=(
+        hyprland
+        hyprpaper
+        hyprpolkitagent
+        hyprsunset
+        hyprtoolkit
+        xdg-user-dirs
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
+    )
+
+    THEME=(
+        qt5-wayland
+        qt6-wayland
+        nwg-look
+        kvantum
+        kvantum-qt5
+        qt6ct
+        catppuccin-gtk-theme-mocha
+        tela-circle-icon-theme-dracula
+        bibata-cursor-theme-bin
+    )
+
+    UTILS=(
+        wofi
+        uwsm
+        grim
+        slurp
+        swappy
+        cliphist
+        mako
+        waybar
+        ghostty
+        lsd
+        bat
+        zoxide
+        ripgrep
+        tealdeer
+        btop
+        yazi
+        ffmpeg
+        7zip
+        jq
+        poppler
+        fd
+        fzf
+        resvg
+        imagemagick
+        networkmanager-openvpn
+        nm-connection-editor
+        iwd
+        impala
+        bluez
+        bluez-utils
+        bluetui
+        wofi-emoji
+    )
+
+    DEV=(
+        rust
+        pyright
+        python-uv
+        ruff
+        lua-language-server
+        marksman
+        harper
+        stylua
+        clang
+        prettier
+    )
+
+    APPS=(
+        imv
+        mpv
+        yt-dlp
+        obsidian
+        ani-cli
+        librewolf-bin
+        steam
+    )
+
+    # Combine all packages
+    ALL_PKGS="${DRIVERS} ${FONTS[*]} ${AUDIO[*]} ${HYPRLAND[*]} ${THEME[*]} ${UTILS[*]} ${DEV[*]} ${APPS[*]}"
+
+    # Install everything in one go to minimize password prompts and dependency checks
+    # Use --needed to skip already installed packages
+    paru -S --needed --noconfirm $ALL_PKGS
 }
 
 change_shell() {
-  install_pkgs fish starship
-  chsh -s "$(which fish)"
+    log "Configuring Shell..."
+    # Ensure fish is in the package list or installed here
+    if ! command -v fish &>/dev/null; then
+        sudo pacman -S --noconfirm fish starship
+    fi
+
+    local shell_path
+    shell_path="$(command -v fish)"
+
+    if [ "$SHELL" != "$shell_path" ]; then
+        log "Changing shell to Fish..."
+        sudo chsh -s "$shell_path" "$USER"
+    else
+        log "Shell is already set to Fish."
+    fi
 }
 
 link_dotfiles() {
-  source_dir="$(pwd)/configs"
-  for file in "$source_dir"/*; do
-    target="$HOME/.config/$(basename "$file")"
-    if [ ! -e "$target" ]; then
-      ln -sf "$file" "$target"
-    else
-      echo "Warning: $target already exists. Skipping link creation."
+    log "Linking Dotfiles..."
+    
+    if [ ! -d "$DOTFILES_DIR" ]; then
+        err "Config directory not found: $DOTFILES_DIR"
+        return
     fi
-  done
-}
 
-pkgs_install() {
-  install_pkgs mesa vulkan-radeon                                                                # Drivers
-  install_pkgs noto-fonts-{cjk,emoji,extra} ttf-cascadia-code-nerd                               # Fonts
-  install_pkgs pipewire-{pulse,jack,alsa} wireplumber wiremix pamixer                            # Audio
-  install_pkgs hypr{land,paper,polkitagent,sunset,toolkit}                                       # Hyprland
-  install_pkgs xdg-{user-dirs,desktop-portal-{hyprland,gtk}}                                     # Xdg tools
-  install_pkgs qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct                                     # Theme tools
-  install_pkgs wofi uwsm grim slurp swappy cliphist mako waybar                                  # Utils
-  install_pkgs ghostty rust lsd bat zoxide ripgrep tealdeer btop                                 # tools
-  install_pkgs pyright python-uv ruff                                                            # Python
-  install_pkgs lua-language-server marksman harper                                               # LSP
-  install_pkgs stylua clang prettier                                                             # Formaters
-  install_pkgs yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick               # Yazi
-  install_pkgs imv mpv yt-dlp obsidian                                                           # Media
-  install_pkgs network{manager-openvpn,-manager-applet}                                          # Network
-  install_pkgs blue{tui,z{,-tools}}                                                              # bluetooth
-  install_pkgs wofi-emoji ani-cli librewolf-bin                                                  # Aur
-  install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin # Themes
-  install_pkgs lib32-{mesa,vulkan-{radeon,icd-loader}} steam                                     # Gaming
+    # Check if GNU Stow is installed (Cleanest way to handle dotfiles)
+    if command -v stow &>/dev/null; then
+        log "Using GNU Stow..."
+        # Assuming your structure is configs/package/.config/package
+        # If your structure is flat (configs/waybar -> ~/.config/waybar):
+        for dir in "$DOTFILES_DIR"/*; do
+            if [ -d "$dir" ]; then
+                pkg=$(basename "$dir")
+                log "Stowing $pkg..."
+                # Backup existing config if it's not a symlink
+                target="$HOME/.config/$pkg"
+                if [ -e "$target" ] && [ ! -L "$target" ]; then
+                    mv "$target" "${target}.bak"
+                fi
+                ln -sf "$dir" "$target" 
+            fi
+        done
+    else
+        # Fallback to manual linking
+        for file in "$DOTFILES_DIR"/*; do
+            filename=$(basename "$file")
+            target="$HOME/.config/$filename"
+            
+            # Create backup if file exists and is not a symlink
+            if [ -e "$target" ] && [ ! -L "$target" ]; then
+                warn "Backing up existing $target to $target.backup"
+                mv "$target" "$target.backup"
+            fi
+
+            log "Linking $filename"
+            ln -sf "$file" "$target"
+        done
+    fi
 }
 
 app_setup() {
-  tldr -u
-  sudo systemctl enable bluetooth.service
-  systemctl --user enable mako.service
-  systemctl --user enable waybar.service
-  systemctl --user enable hyprpaper.service
-  systemctl --user enable hyprsunset.service
-  systemctl --user enable hyprpolkitagent.service
+    log "Enabling Services..."
+    
+    # System services
+    sudo systemctl enable --now bluetooth.service
+    
+    # User services (use || true so script doesn't fail if already enabled)
+    systemctl --user enable --now mako.service || true
+    systemctl --user enable --now waybar.service || true
+    systemctl --user enable --now hyprpaper.service || true
+    systemctl --user enable --now hyprsunset.service || true
+    systemctl --user enable --now hyprpolkitagent.service || true
+    
+    # Network Manager setup
+    if [ ! -f /etc/NetworkManager/conf.d/iwd.conf ]; then
+        log "Configuring NetworkManager backend..."
+        sudo mkdir -p /etc/NetworkManager/conf.d
+        echo -e "[device]\nwifi.backend=iwd" | sudo tee /etc/NetworkManager/conf.d/iwd.conf
+        sudo systemctl restart NetworkManager
+    fi
+
+    # Initialize tldr
+    log "Updating tldr cache..."
+    tldr -u || warn "Failed to update tldr cache (network issue?)"
 }
 
+# --------------------------------------------------------------------------
+# Main Execution
+# --------------------------------------------------------------------------
+
 main() {
-  sys_update
-  paru_install
-  change_shell
-  link_dotfiles
-  pkgs_install
-  app_setup
+    # Ask for sudo upfront
+    log "Requesting Sudo privileges..."
+    sudo -v
+    sudo_refresh
+
+    sys_update
+    paru_install
+    install_pkgs
+    link_dotfiles
+    change_shell
+    app_setup
+    
+    log "Installation Complete! Please reboot."
 }
 
 main

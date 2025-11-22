@@ -4,9 +4,10 @@
 
 window#waybar {
     transition: background-color 0.5s;
-    background-color: rgba(30, 30, 46, 0);
+    background-color: rgba(30, 30, 46, 0); /* Transparent window */
 }
 
+/* Shared Module Styling */
 #workspaces button,
 #mpris,
 #tray,
@@ -22,6 +23,7 @@ window#waybar {
     background-color: #1e1e2e;
 }
 
+/* Workspaces */
 #workspaces button:hover,
 #workspaces button.active:hover {
     color: #1e1e2e;
@@ -36,37 +38,38 @@ window#waybar {
     color: #f38ba8;
 }
 
+/* Media Player */
 #mpris.playing {
     color: #89b4fa;
 }
 
-#mpris.paused, #wireplumber.muted {
+#mpris.paused {
     color: #45475a;
 }
 
+/* Memory */
 #memory {
     color: #f9e2af;
 }
 
+/* System Tray Group */
 #bluetooth,
 #wireplumber,
 #network {
     color: #94e2d5;
 }
 
+#wireplumber.muted {
+    color: #45475a;
+}
+
+/* Clock Group */
 #clock,
 #clock.simpleclock {
     color: #89b4fa;
 }
 
-#window {
-    color: #cdd6f4;
-}
-
-window#waybar.empty #window {
-    background-color: rgba(30, 30, 46, 0);
-}
-
+/* Tooltips */
 tooltip {
     background-color: #1e1e2e;
     border: 1px solid #cba6f7;
