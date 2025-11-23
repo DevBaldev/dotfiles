@@ -1,13 +1,18 @@
+@define-color off rgba(88, 91, 112, 0.8);
+@define-color text rgba(205, 214, 244, 0.8);
+@define-color base rgba(030, 030, 046, 0.8);
+@define-color play rgba(148, 226, 213, 0.8);
+@define-color mauve rgba(203, 166, 247, 0.8);
+
 * {
     font: 600 16px "CaskaydiaCove Nerd Font", sans-serif;
 }
 
 window#waybar {
     transition: background-color 0.5s;
-    background-color: rgba(30, 30, 46, 0); /* Transparent window */
+    background-color: transparent;
 }
 
-/* Shared Module Styling */
 #workspaces button,
 #mpris,
 #tray,
@@ -16,68 +21,50 @@ window#waybar {
 #network,
 #memory,
 #clock {
-    color: #cdd6f4;
+    color: @text;
     border-radius: 4px;
     padding: 2px 10px;
     margin: 2px 4px;
-    background-color: #1e1e2e;
+    background-color: @base;
 }
 
-/* Workspaces */
 #workspaces button:hover,
 #workspaces button.active:hover {
-    color: #1e1e2e;
-    background-color: #cdd6f4;
-}
-
-#workspaces button.active {
-    color: #cba6f7;
+    color: @base;
+    background-color: @mauve;
 }
 
 #workspaces button.urgent {
-    color: #f38ba8;
+    color: @red;
 }
 
-/* Media Player */
-#mpris.playing {
-    color: #89b4fa;
-}
-
-#mpris.paused {
-    color: #45475a;
-}
-
-/* Memory */
-#memory {
-    color: #f9e2af;
-}
-
-/* System Tray Group */
+#workspaces button.active,
+#memory,
 #bluetooth,
 #wireplumber,
-#network {
-    color: #94e2d5;
-}
-
-#wireplumber.muted {
-    color: #45475a;
-}
-
-/* Clock Group */
+#network,
 #clock,
 #clock.simpleclock {
-    color: #89b4fa;
+    color: @mauve;
 }
 
-/* Tooltips */
+#mpris.playing {
+    color: @play;
+}
+
+#mpris.paused,
+#wireplumber.muted {
+    color: @off;
+}
+
 tooltip {
-    background-color: #1e1e2e;
-    border: 1px solid #cba6f7;
-    border-radius: 8px;
+    border-radius: 5px;
+    background-color: @base;
+    border: 1px solid @mauve;
 }
 
 tooltip label {
-    color: #cdd6f4;
+    color: @text;
     padding: 2px;
     font-size: 13px;
 }

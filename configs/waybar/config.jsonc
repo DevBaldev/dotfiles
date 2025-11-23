@@ -29,8 +29,6 @@
             "4": "",
             "5": ""
         },
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
         "tooltip": false
     },
     "mpris": {
@@ -38,7 +36,7 @@
             "artist",
             "title"
         ],
-        "title-len": 20,
+        "max-length": 40,
         "format": "{player_icon} {dynamic}",
         "format-paused": "{status_icon} <i>{dynamic}</i>",
         "status-icons": {
@@ -47,7 +45,8 @@
         "player-icons": {
             "default": ""
         },
-        "tooltip-format": "{artist} - {title}"
+        "tooltip-format": "{artist} - {title}",
+        "on-click-right": "ghostty --title=spotify -e ncspot"
     },
     "tray": {
         "icon-size": 14,
@@ -98,7 +97,7 @@
         }
     },
     "memory": {
-        "interval": 30,
+        "interval": 10,
         "format": " {used}G",
         "on-click": "uwsm app -- ghostty --title=btop -e btop",
         "tooltip": true,
