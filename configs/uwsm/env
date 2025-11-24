@@ -1,6 +1,6 @@
 export SHELL=fish
 export EDITOR=nvim
-export TERM=alacritty
+export TERM=ghostty
 
 export MOZ_ENABLE_WAYLAND=1
 export CLUTTER_BACKEND="wayland"
