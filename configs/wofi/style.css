@@ -1,77 +1,70 @@
-* {
-  font-size: 14px;
-  font-family: "CaskaydiaCove Nerd Font", monospace;
-}
+@define-color bg-color alpha(#1e1e2e, 0.6);
+@define-color text-color #cdd6f4;
+@define-color accent-color #f38ba8;
+@define-color selected-bg-color alpha(#89b4fa, 0.2);
+@define-color selected-border-color #b4befe;
+@define-color selected-text-color #cba6f7;
 
 window {
   margin: 0px;
   padding: 10px;
-  border-radius: 0.1em;
-  animation: slideIn 0.5s ease-in-out both;
-  background-color: rgba(30, 30, 46, 0.5);
-}
-
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-#inner-box {
-  margin: 5px;
-  padding: 10px;
-  animation: fadeIn 0.5s ease-in-out both;
+  font-family: "CaskaydiaCove Nerd Font", monospace;
+  font-size: 14px;
+  background-color: @bg-color;
+  color: @text-color;
 }
 
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 #outer-box {
   margin: 5px;
   padding: 10px;
+  border: none;
 }
 
 #input {
-  margin: 5px 20px;
+  margin: 5px;
   padding: 10px;
-  border-radius: 0.1em;
-  color: #cdd6f4;
+  border-radius: 5px;
+  border: none;
+  background-color: @bg-color;
+  color: @text-color;
   animation: fadeIn 0.5s ease-in-out both;
-  background-color: rgba(30, 30, 46, 0.4);
 }
 
 #input image {
   border: none;
-  color: #f38ba8;
+  color: @accent-color;
+}
+
+#inner-box {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  animation: fadeIn 0.5s ease-in-out both;
 }
 
 #text {
   margin: 5px;
-  color: #cdd6f4;
-  animation: fadeIn 0.5s ease-in-out both;
+  border: none;
+  color: @text-color;
 }
 
 #entry {
-  background-color: transparent;
+  margin: 0px 0px;
+  border: none;
+  border-radius: 5px;
 }
 
 #entry:selected {
-  border: 0.11em solid #b4befe;
+  background-color: @selected-bg-color;
+  border: 2px solid @selected-border-color;
 }
 
 #entry:selected #text {
-  color: #cba6f7;
-}
-
-#entry:drop(active) {
-  background-color: #b4befe !important;
+  color: @selected-text-color;
+  font-weight: bold;
 }

@@ -1,8 +1,7 @@
-@define-color off rgba(88, 91, 112, 0.8);
-@define-color text rgba(205, 214, 244, 0.8);
-@define-color base rgba(030, 030, 046, 0.8);
-@define-color play rgba(148, 226, 213, 0.8);
-@define-color mauve rgba(203, 166, 247, 0.8);
+@define-color text #cdd6f4;
+@define-color base #1e1e2e;
+@define-color blue #89b4fa;
+@define-color surface2 #585b70;
 
 * {
     font: 600 16px "CaskaydiaCove Nerd Font", sans-serif;
@@ -31,7 +30,7 @@ window#waybar {
 #workspaces button:hover,
 #workspaces button.active:hover {
     color: @base;
-    background-color: @mauve;
+    background-color: @blue;
 }
 
 #workspaces button.urgent {
@@ -39,28 +38,25 @@ window#waybar {
 }
 
 #workspaces button.active,
+#mpris.playing,
 #memory,
 #bluetooth,
 #wireplumber,
 #network,
 #clock,
 #clock.simpleclock {
-    color: @mauve;
-}
-
-#mpris.playing {
-    color: @play;
+    color: @blue;
 }
 
 #mpris.paused,
 #wireplumber.muted {
-    color: @off;
+    color: @surface2;
 }
 
 tooltip {
     border-radius: 5px;
     background-color: @base;
-    border: 1px solid @mauve;
+    border: 1px solid @blue;
 }
 
 tooltip label {
