@@ -8,67 +8,75 @@ sys_update() {
 
 paru_install() {
   if ! command -v paru &>/dev/null; then
-    sudo pacman -Sy rust --noconfirm
-    git clone https://aur.archlinux.org/paru.git
-    (cd paru && makepkg -si --noconfirm)
-    rm -rf paru
+    sudo pacman -S --needed --noconfirm base-devel git rust
+    tmpdir = "$(mktemp -d)"
+    git clone https://aur.archlinux.org/paru.git "$temdir/paru"
+    (cd "$tmpdir/paru" && makepkg -si --noconfirm --needed)
+    rm -rf "$temdir"
   fi
 }
 
 install_pkgs() {
-  paru -Sy --needed "$@" --noconfirm
+  paru -S --needed --noconfirm "$@"
 }
 
 change_shell() {
   install_pkgs fish starship
-  chsh -s "$(which fish)"
+  fish_path="$(command -v fish || true)"
+  if [ -n "$fish_path" ] && [ "$SHELL" != "$fish_path" ]; then
+    chsh -s "$fish_path" || echo "chsh failed; change your shell manually."
+  fi
 }
 
 link_dotfiles() {
   source_dir="$(pwd)/configs"
+  mkdir -p "$HOME/.config"
   for file in "$source_dir"/*; do
-    target="$HOME/.config/$(basename "$file")"
-    if [ ! -e "$target" ]; then
-      ln -sf "$file" "$target"
-    else
-      echo "Warning: $target already exists. Skipping link creation."
+    [ -e "$file" ] || continue
+    base="$(basename "$file")"
+    target="$HOME/.config/$base"
+    if [ -L "$target" ]; then
+      rm -f "$target"
+    elif [ -e "$target" ]; then
+      mv "$target" "$target".backup."$(date +%s)"
     fi
+    ln -sfn "$file" "$target"
   done
 }
 
 pkgs_install() {
-  install_pkgs mesa vulkan-radeon                                                                # Drivers
-  install_pkgs noto-fonts-{cjk,emoji,extra} ttf-cascadia-code-nerd                               # Fonts
-  install_pkgs pipewire-{pulse,jack,alsa} wireplumber wiremix pamixer                            # Audio
-  install_pkgs hypr{land,paper,polkitagent,sunset,toolkit}                                       # Hyprland
-  install_pkgs xdg-{user-dirs,desktop-portal-{hyprland,gtk}}                                     # Xdg tools
-  install_pkgs qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct                                     # Theme tools
-  install_pkgs wofi uwsm grim slurp swappy cliphist mako waybar                                  # Utils
-  install_pkgs ghostty rust lsd bat zoxide ripgrep tealdeer btop                                 # tools
-  install_pkgs pyright python-uv ruff                                                            # Python
-  install_pkgs lua-language-server marksman harper                                               # LSP
-  install_pkgs stylua clang prettier                                                             # Formaters
-  install_pkgs yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick               # Yazi
-  install_pkgs imv mpv yt-dlp obsidian                                                           # Media
-  install_pkgs networkmanager-openvpn nm-connection-editor iwd impala                            # Network
-  install_pkgs blue{tui,z{,-tools}}                                                              # bluetooth
-  install_pkgs wofi-emoji ani-cli librewolf-bin                                                  # Aur
-  install_pkgs catppuccin-gtk-theme-mocha tela-circle-icon-theme-dracula bibata-cursor-theme-bin # Themes
-  install_pkgs lib32-{mesa,vulkan-{radeon,icd-loader}} steam                                     # Gaming
+  install_pkgs mesa vulkan-radeon \
+    noto-fonts-{cjk,emoji,extra} ttf-cascadia-code-nerd \
+    pipewire-{pulse,jack,alsa} wireplumber wiremix pamixer \
+    hypr{land,paper,polkitagent,sunset,toolkit} \
+    xdg-{user-dirs,desktop-portal-{hyprland,gtk}} \
+    qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct \
+    wofi uwsm grim slurp swappy cliphist mako waybar \
+    ghostty rust lsd bat zoxide ripgrep tealdeer btop npm unzip python-uv \
+    yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick \
+    imv mpv yt-dlp obsidian mupdf \
+    networkmanager-openvpn nm-connection-editor iwd impala \
+    blue{tui,z{,-tools}} \
+    lib32-{mesa,vulkan-{radeon,icd-loader}} steam \
+    tela-circle-icon-theme-dracula || true
+
+  install_pkgs wofi-emoji ani-cli librewolf-bin \
+    catppuccin-gtk-theme-mocha bibata-cursor-theme-bin || true
 }
 
 app_setup() {
-  tldr -u || warn "Failed to update tldr cache (network issue?)"
-  sudo systemctl enable bluetooth.service
-  systemctl --user enable mako.service
-  systemctl --user enable waybar.service
-  systemctl --user enable hyprpaper.service
-  systemctl --user enable hyprsunset.service
-  systemctl --user enable hyprpolkitagent.service
+  tldr -u || echo "Failed to update tldr cache (network issue?)"
+  if systemctl --user show-environment &>/dev/null; then
+    systemctl --user enable --now mako.service || true
+    systemctl --user enable --now waybar.service || true
+    systemctl --user enable --now hyprpaper.service || true
+    systemctl --user enable --now hyprsunset.service || true
+    systemctl --user enable --now hyprpolkitagent.service || true
+  fi
   if [ ! -f /etc/NetworkManager/conf.d/iwd.conf ]; then
-      sudo mkdir -p /etc/NetworkManager/conf.d
-      echo -e "[device]\nwifi.backend=iwd" | sudo tee /etc/NetworkManager/conf.d/iwd.conf
-      sudo systemctl restart NetworkManager
+    sudo mkdir -p /etc/NetworkManager/conf.d
+    echo -e "[device]\nwifi.backend=iwd" | sudo tee /etc/NetworkManager/conf.d/iwd.conf
+    sudo systemctl restart NetworkManager
   fi
 }
 
@@ -78,7 +86,7 @@ main() {
   change_shell
   link_dotfiles
   pkgs_install
-  app_setup
+  # app_setup
 }
 
 main

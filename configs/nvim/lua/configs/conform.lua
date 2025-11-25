@@ -8,6 +8,9 @@ local options = {
       "ruff_format",
       "ruff_organize_imports",
     },
+    bash = { "shfmt" },
+    css = { "prettier" },
+    html = { "prettier" },
     markdown = { "prettier" },
   },
 
