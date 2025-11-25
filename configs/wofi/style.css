@@ -1,22 +1,19 @@
-@define-color bg-color alpha(#1e1e2e, 0.6);
-@define-color text-color #cdd6f4;
-@define-color accent-color #f38ba8;
-@define-color selected-bg-color alpha(#89b4fa, 0.2);
-@define-color selected-border-color #b4befe;
-@define-color selected-text-color #cba6f7;
-
 window {
   margin: 0px;
   padding: 10px;
   font-family: "CaskaydiaCove Nerd Font", monospace;
   font-size: 14px;
-  background-color: @bg-color;
-  color: @text-color;
+  background-color: alpha(#1e1e2e, 0.6);
+  color: #cdd6f4;
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #outer-box {
@@ -30,14 +27,14 @@ window {
   padding: 10px;
   border-radius: 5px;
   border: none;
-  background-color: @bg-color;
-  color: @text-color;
+  background-color: alpha(#1e1e2e, 0.6);
+  color: #cdd6f4;
   animation: fadeIn 0.5s ease-in-out both;
 }
 
 #input image {
   border: none;
-  color: @accent-color;
+  color: #f38ba8;
 }
 
 #inner-box {
@@ -50,7 +47,7 @@ window {
 #text {
   margin: 5px;
   border: none;
-  color: @text-color;
+  color: #cdd6f4;
 }
 
 #entry {
@@ -60,11 +57,11 @@ window {
 }
 
 #entry:selected {
-  background-color: @selected-bg-color;
-  border: 2px solid @selected-border-color;
+  background-color: alpha(#89b4fa, 0.2);
+  border: 2px solid #b4befe;
 }
 
 #entry:selected #text {
-  color: @selected-text-color;
+  color: #cba6f7;
   font-weight: bold;
 }

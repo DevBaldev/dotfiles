@@ -23,6 +23,7 @@ return {
         "vimdoc",
         "c",
         "cpp",
+        "nix",
         "rust",
         "bash",
         "fish",
