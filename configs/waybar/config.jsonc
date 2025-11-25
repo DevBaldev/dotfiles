@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "position": "bottom",
+    "position": "left",
     "modules-left": [
         "hyprland/workspaces"
     ],
@@ -88,7 +88,7 @@
         "on-click": "uwsm app -- ghostty --title=nmtui -e nmtui-connect"
     },
     "clock": {
-        "format": "{:%a %d.%m  %H:%M}",
+        "format": "\n{:%H\n%M}",
         "calendar": {
             "format": {
                 "days": "<span weight='normal'>{}</span>",
