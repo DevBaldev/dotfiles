@@ -9,12 +9,10 @@
     ],
     "modules-right": [
         "tray",
-        "memory",
-        "wireplumber",
         "bluetooth",
+        "wireplumber",
         "network",
-        "clock",
-        "clock#simpleclock"
+        "clock"
     ],
     "hyprland/workspaces": {
         "on-click": "activate",
@@ -45,46 +43,24 @@
         "player-icons": {
             "default": ""
         },
-        "tooltip-format": "{artist} - {title}",
-        "on-click-right": "ghostty --title=spotify -e ncspot"
+        "tooltip-format": "{artist} - {title}"
     },
     "tray": {
         "icon-size": 14,
         "spacing": 8
     },
     "bluetooth": {
-        "format": "",
-        "format-disabled": "󰂲",
-        "format-connected": "󰂱",
+        "format": "󱡒",
+        "format-disabled": "󱡐",
+        "format-connected": "󱡏",
         "format-no-controller": "",
         "tooltip-format": "{num_connections} Connected",
         "tooltip-format-connected": "{num_connections} Connected\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}",
         "on-click": "uwsm app -- ghostty --title=bluetui -e bluetui"
     },
-    "network": {
-        "format-icons": [
-            "󰤯",
-            "󰤟",
-            "󰤢",
-            "󰤥",
-            "󰤨"
-        ],
-        "format": "{icon}",
-        "format-wifi": "{icon}",
-        "format-ethernet": "󰀂",
-        "format-disconnected": "󰤮",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-        "tooltip-format-ethernet": "{ifname}",
-        "tooltip-format-disconnected": "Disconnected",
-        "interval": 3,
-        "spacing": 1,
-        "on-click": "uwsm app -- ghostty -e impala"
-    },
     "wireplumber": {
         "format": "{icon}",
-        "on-click": "uwsm app -- ghostty --title=wiremix -e wiremix",
-        "on-click-right": "pamixer -t",
         "tooltip-format": "{volume}%",
         "scroll-step": 5,
         "format-muted": "",
@@ -94,21 +70,25 @@
                 "",
                 ""
             ]
-        }
+        },
+        "on-click": "uwsm app -- ghostty --title=wiremix -e wiremix",
+        "on-click-right": "uwsm app -- pamixer -t"
     },
-    "memory": {
-        "interval": 10,
-        "format": " {used}G",
-        "on-click": "uwsm app -- ghostty --title=btop -e btop",
-        "tooltip": true,
-        "tooltip-format": "{percentage}% used"
-    },
-    "clock#simpleclock": {
-        "tooltip": false,
-        "format": "{:%H:%M}"
+    "network": {
+        "format-icons": [ "󰤯", "󰤟", "󰤢", "󰤥", "󰤨" ],
+        "format": "{icon}",
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰀂",
+        "format-disconnected": "󰤮",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}",
+        "tooltip-format-disconnected": "Disconnected",
+        "interval": 3,
+        "spacing": 1,
+        "on-click": "uwsm app -- ghostty --title=nmtui -e nmtui-connect"
     },
     "clock": {
-        "format": "{:%a %d.%m}",
+        "format": "{:%a %d.%m  %H:%M}",
         "calendar": {
             "format": {
                 "days": "<span weight='normal'>{}</span>",

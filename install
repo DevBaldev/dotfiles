@@ -55,7 +55,7 @@ pkgs_install() {
     ghostty rust lsd bat zoxide ripgrep tealdeer btop npm unzip python-uv \
     yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick \
     imv mpv yt-dlp obsidian mupdf \
-    networkmanager-openvpn nm-connection-editor iwd impala \
+    networkmanager-openvpn nm-connection-editor \
     blue{tui,z{,-tools}} \
     lib32-{mesa,vulkan-{radeon,icd-loader}} steam \
     tela-circle-icon-theme-dracula || true
@@ -73,11 +73,6 @@ app_setup() {
     systemctl --user enable --now hyprsunset.service || true
     systemctl --user enable --now hyprpolkitagent.service || true
   fi
-  if [ ! -f /etc/NetworkManager/conf.d/iwd.conf ]; then
-    sudo mkdir -p /etc/NetworkManager/conf.d
-    echo -e "[device]\nwifi.backend=iwd" | sudo tee /etc/NetworkManager/conf.d/iwd.conf
-    sudo systemctl restart NetworkManager
-  fi
 }
 
 main() {
@@ -86,7 +81,7 @@ main() {
   change_shell
   link_dotfiles
   pkgs_install
-  # app_setup
+  app_setup
 }
 
 main
