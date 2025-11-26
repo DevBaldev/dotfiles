@@ -58,8 +58,8 @@ pkgs_install() {
     networkmanager-openvpn nm-connection-editor blue{tui,z{,-tools}} \
     tela-circle-icon-theme-dracula || true
 
-  install_pkgs wofi-emoji ani-cli librewolf-bin \
-    catppuccin-gtk-theme-mocha bibata-cursor-theme-bin || true
+  install_pkgs ani-cli librewolf-bin catppuccin-gtk-theme-mocha \
+    bibata-cursor-theme-bin || true
 }
 
 app_setup() {
@@ -74,12 +74,12 @@ app_setup() {
 }
 
 main() {
-  # sys_update
-  # paru_install
-  # change_shell
+  sys_update
+  paru_install
+  change_shell
   link_dotfiles
-  # pkgs_install
-  # app_setup
+  pkgs_install
+  app_setup
 }
 
 main
