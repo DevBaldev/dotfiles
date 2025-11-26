@@ -57,7 +57,6 @@ pkgs_install() {
     imv mpv yt-dlp obsidian mupdf \
     networkmanager-openvpn nm-connection-editor \
     blue{tui,z{,-tools}} \
-    lib32-{mesa,vulkan-{radeon,icd-loader}} steam \
     tela-circle-icon-theme-dracula || true
 
   install_pkgs wofi-emoji ani-cli librewolf-bin \
