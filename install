@@ -54,7 +54,7 @@ pkgs_install() {
     wofi uwsm grim slurp swappy cliphist mako waybar \
     ghostty rust lsd bat zoxide ripgrep tealdeer btop npm unzip python-uv \
     yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick \
-    imv mpv yt-dlp obsidian mupdf \
+    imv mpv yt-dlp obsidian zathura-pdf-mupdf \
     networkmanager-openvpn nm-connection-editor \
     blue{tui,z{,-tools}} \
     tela-circle-icon-theme-dracula || true
