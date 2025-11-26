@@ -9,10 +9,10 @@
     ],
     "modules-right": [
         "tray",
+        "memory",
         "bluetooth",
         "wireplumber",
         "network",
-        "memory",
         "clock"
     ],
     "hyprland/workspaces": {
@@ -52,10 +52,10 @@
     },
     "memory": {
         "interval": 10,
-        "format": " {used}G",
+        "format": " {used}G",
+        "on-click": "uwsm app -- ghostty --title=btop -e btop",
         "tooltip": true,
-        "tooltip-format": "{percentage}% used",
-        "on-click": "uwsm app -- ghostty --title=btop -e btop"
+        "tooltip-format": "{percentage}% used"
     },
     "bluetooth": {
         "format": "󱡒",
