@@ -12,14 +12,14 @@ window#waybar {
 #workspaces button,
 #mpris,
 #tray,
+#memory,
 #bluetooth,
 #wireplumber,
 #network,
-#memory,
 #clock {
-  color: #cdd6f4;
-  padding: 1px 10px;
-  margin: 1px;
+  color: #b4befe;
+  padding: 2px 10px;
+  margin: 2px;
 }
 
 #workspaces button.active {
@@ -30,17 +30,6 @@ window#waybar {
   color: #f38ba8;
 }
 
-#workspaces button,
-#mpris.playing,
-#memory,
-#bluetooth,
-#wireplumber,
-#network,
-#clock,
-#clock.simpleclock {
-  color: alpha(#b4befe, 0.8);
-}
-
 #mpris.paused,
 #wireplumber.muted {
   color: #585b70;
@@ -49,11 +38,11 @@ window#waybar {
 tooltip {
   border-radius: 5px;
   background-color: #1e1e2e;
-  border: 1px solid alpha(#b4befe, 0.8);
+  border: 1px solid #b4befe;
 }
 
 tooltip label {
-  color: #cdd6f4;
+  color: #b4befe;
   padding: 2px;
   font-size: 13px;
 }

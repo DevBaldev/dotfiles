@@ -12,6 +12,7 @@
         "bluetooth",
         "wireplumber",
         "network",
+        "memory",
         "clock"
     ],
     "hyprland/workspaces": {
@@ -48,6 +49,13 @@
     "tray": {
         "icon-size": 14,
         "spacing": 8
+    },
+    "memory": {
+        "interval": 10,
+        "format": " {used}G",
+        "tooltip": true,
+        "tooltip-format": "{percentage}% used",
+        "on-click": "uwsm app -- ghostty --title=btop -e btop"
     },
     "bluetooth": {
         "format": "󱡒",
