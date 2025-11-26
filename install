@@ -74,12 +74,12 @@ app_setup() {
 }
 
 main() {
-  sys_update
-  paru_install
-  change_shell
+  # sys_update
+  # paru_install
+  # change_shell
   link_dotfiles
-  pkgs_install
-  app_setup
+  # pkgs_install
+  # app_setup
 }
 
 main
