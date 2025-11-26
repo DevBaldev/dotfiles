@@ -47,7 +47,7 @@ link_dotfiles() {
 pkgs_install() {
   install_pkgs mesa vulkan-radeon \
     noto-fonts-{cjk,emoji,extra} ttf-cascadia-code-nerd \
-    pipewire-{pulse,jack,alsa} wireplumber wiremix pamixer \
+    pipewire-{pulse,jack,alsa} wire{plumber,mix} pamixer \
     hypr{land,paper,polkitagent,sunset,toolkit} \
     xdg-{user-dirs,desktop-portal-{hyprland,gtk}} \
     qt{5,6}-wayland nwg-look kvantum{,-qt5} qt6ct \
