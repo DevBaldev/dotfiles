@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "position": "left",
+    "position": "bottom",
     "modules-left": [
         "hyprland/workspaces"
     ],
@@ -34,8 +34,9 @@
             "artist",
             "title"
         ],
-        "format": "{player_icon}",
-        "format-paused": "{status_icon}",
+        "max-length": 40,
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
         "status-icons": {
             "paused": ""
         },
@@ -87,7 +88,7 @@
         "on-click": "uwsm app -- ghostty --title=nmtui -e nmtui-connect"
     },
     "clock": {
-        "format": "\n{:%H\n%M}",
+        "format": "{:%H:%M}",
         "calendar": {
             "format": {
                 "days": "<span weight='normal'>{}</span>",
